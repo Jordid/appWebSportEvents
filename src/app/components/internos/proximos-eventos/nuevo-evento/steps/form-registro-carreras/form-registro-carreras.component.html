@@ -1,0 +1,238 @@
+<div class="stepsdemo-content">    
+    <div *ngIf="!banderaMostrarFormRegistroCarreras" class="container col-12">
+        <!-- Inicio tabla de carreras. -->
+        <div class="row m-2">
+            <div class="container border rounded p-1" style="background: rgb(216, 214, 214);">                            
+                <button type="button" class="btn btn-info" (click)="mostrarFormRegistroCarreras()">  Agregar carrera </button>
+            </div>
+        </div>                                            
+        
+        <div class="row m-2">
+            <div class="container border rounded">
+
+                <div class="row m-2">
+                    <div class="container text-center">
+                        <label class=""><b>Lista de carreras</b></label>
+                    </div>
+                </div>
+
+                <div class="table-responsive tableFixHead">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Carrera</th> 
+                                <th scope="col">iDCiudad</th>
+                                <th scope="col">Ciudad</th> 
+                                <th scope="col">Distancia</th> 
+                                <th scope="col">Tipo carrera</th>                                
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let carrera of getCarreras(); let i = index">
+                                <th scope="row"> {{ i+1 }} </th>
+                                <td> {{ carrera.nombre }} </td>
+                                <td> {{ carrera.idCiudad }} </td>
+                                <td> {{ carrera.nombreCiudad }} </td>
+                                <td> {{ carrera.distancia }} </td>
+                                <td> {{ carrera.tipoCarreraValor }} </td>
+                                <td style="width: 125px;">
+                                    <div class="row">
+                                        <button 
+                                            class="btn fa-sm" 
+                                            title="Inscribirme" 
+                                            style="background: rgb(4, 187, 4); color: rgb(255, 255, 255);">
+                                            <i class="fa fa-address-book"></i>
+                                        </button>
+                                        
+                                        <button 
+                                            class="btn ml-1 fa-sm" 
+                                            title="Editar" 
+                                            style="background: rgb(4, 92, 199); color: rgb(255, 255, 255);">
+                                            <i class="fa fa-edit"></i>
+                                        </button>
+
+                                        <button 
+                                            class="btn ml-1 fa-sm" 
+                                            title="Eliminar" 
+                                            style="background: rgb(179, 5, 5); color: rgb(255, 255, 255);">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>                        
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>
+        </div>      
+    </div>
+
+    <div *ngIf="banderaMostrarFormRegistroCarreras" class="container col-12">
+
+        <div class="row m-2">
+            <div class="container text-center border rounded" style="background: rgb(249, 250, 184);">
+                <label class="mt-1"><b>Formulario de creación de carreras</b></label>
+            </div>
+        </div>                
+                
+        <div class="row m-2">
+            <div class="border rounded col-12">
+                <form autocomplete="off" [formGroup]="forma">
+                    <div class="row">                                       
+                        <div class="container col-lg-6 col-md-8 col-sm-12 col-xs-12">                       
+                            <div class="form-group">
+                                <label>Nombre de la carrera: </label>
+                                <input 
+                                    class="form-control" 
+                                    type="text"
+                                    formControlName="nombre"
+                                    [class.is-invalid]="nombreNovalido">
+                                    
+                                <small *ngIf="nombreNovalido" class="text-danger">
+                                    El nombre debe contener al menos 5 letras.
+                                </small>
+                            </div>
+            
+                            <div class="form-group">
+                                <label>Descripción</label>
+                                <input 
+                                    class="form-control" 
+                                    type="text"
+                                    formControlName="descripcion"
+                                    [class.is-invalid]="descripcionNovalido">
+                                    
+                                <small *ngIf="descripcionNovalido" class="text-danger">
+                                    La descripción debe contener al menos 5 letras.
+                                </small>
+                            </div>                                                        
+
+                            <div class="form-group">
+                                <label>Ciudad</label>
+                                <select class="form-control"
+                                    formControlName="idCiudad">
+                                    
+                                    <option *ngFor="let ciudad of ciudades" [value]="ciudad.code"> {{ ciudad.name }}</option>
+                                    
+                                </select>                                                                 
+                            </div>  
+
+                            <div class="form-group">
+                                <label>Latitud</label>
+                                <input 
+                                    class="form-control" 
+                                    type="text"
+                                    formControlName="latitud"
+                                    >
+                            
+                            </div>
+
+                            <div class="form-group">
+                                <label>Longitud</label>
+                                <input 
+                                    class="form-control" 
+                                    type="text"
+                                    formControlName="longitud"
+                                    >
+                                
+                            </div>                            
+                            
+                        </div>
+                        <div class="container col-lg-6 col-md-8 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                                <label>Distancia</label>
+                                <input 
+                                    class="form-control" 
+                                    type="text"
+                                    formControlName="distancia"
+                                    [class.is-invalid]="distanciaNovalido">
+                                    
+                                    <small *ngIf="" class="text-danger">
+                                        La distancia debe ser un valor numérico mayor a 0.
+                                    </small>
+                            </div>
+            
+                            
+
+                            <div class="form-group">
+                                <label>Tipo carrera</label>
+                                <select 
+                                    class="form-control"
+                                    formControlName="idTipoCarrera">                                    
+                                    <option *ngFor="let tipoCarreraIterador of tiposCarreras" [value]="tipoCarreraIterador.code"> {{ tipoCarreraIterador.name }}</option>                                    
+                                </select>
+                                
+                                <small *ngIf="tipoCarreraNovalido" class="text-danger">
+                                    Seleccione el tipo de carrera
+                                </small>                                
+                            </div>                              
+
+                            <div class="form-group">
+                                <label class="mr-3">Motivo</label>
+                                <br>
+                                <div class="form-group border rounded">
+                                    <div class="form-check form-check-inline mt-2 mb-2">
+                                        <input 
+                                        class="form-check-input ml-2"
+                                        type="radio"
+                                        formControlName="motivo"
+                                        value="N">
+                                    
+                                        <label class="form-check-label mr-3">Normal</label>
+    
+                                        <input 
+                                            class="form-check-input"
+                                            type="radio"
+                                            formControlName="motivo"
+                                            value="B">
+                                        <label class="form-check-label">Benéfica</label>
+                                    </div>
+                                </div>                                                                        
+                            </div>                    
+
+                            <div class="form-group">
+                                <label for="age">Fecha de inicio</label>
+                                <input 
+                                    class="form-control" 
+                                    type="date" 
+                                    value="" 
+                                    id="example-date-input"
+                                    formControlName="fechaInicio">                             
+                            </div>
+
+                            <div class="form-group">
+                                <label for="age">Hora de inicio</label>                                     
+                                <input 
+                                    class="form-control"
+                                    type="time"
+                                    formControlName="horaInicio"/>                                    
+                            </div>
+
+                        </div>                                                                                      
+                    </div>
+                </form>       
+            </div>
+        </div>
+        
+        <div class="row m-2">
+            <div class="container text-center border rounded" style="background: rgb(249, 250, 184);">
+                <button type="button" class="btn btn-danger mt-1 mb-1" (click)="cancelarAgregacionCarrera()"> Cancelar</button>
+                <button type="button" class="btn btn-secondary ml-1" (click)="limpiarFormRegistroCarreras()"> Limpiar</button>
+                <button type="button" class="btn btn-info ml-1" (click)="agregarCarreraAlEvento()">           Agregar</button>
+            </div>
+        </div>
+
+    </div>
+
+    <div *ngIf="!banderaMostrarFormRegistroCarreras" class="container col-12">
+        <div class="row m-2">                        
+            <div class="container text-center border rounded" style="background: rgb(216, 214, 214);">
+                <button type="button" class="btn btn-danger    mt-1 mb-1" (click)="cancelarCreacionCarreras()"> Cancelar     </button>
+                <button type="button" class="btn btn-secondary ml-1"      (click)="prevPage()">                 << Atrás     </button>
+                <button type="button" class="btn btn-info      ml-1"      (click)="nextPage()">                 Siguiente >> </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,155 @@
+<div class="stepsdemo-content">    
+    <div *ngIf="!banderaMostrarFormRegistroCategorias" class="container col-12">
+        <!-- Inicio tabla de carreras. -->
+        <div class="row m-2">
+            <div class="container border rounded p-1" style="background: rgb(216, 214, 214);">                            
+                <button type="button" class="btn btn-info" (click)="mostrarFormRegistroCategorias()">  Agregar categoría </button>
+            </div>
+        </div>                                            
+        
+        <div class="row m-2">
+            <div class="container border rounded">
+
+                <div class="row m-2">
+                    <div class="container text-center">
+                        <label class=""><b>Lista de categorías</b></label>
+                    </div>
+                </div>
+
+                <div class="table-responsive tableFixHead">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Evento</th>
+                                <th scope="col">Lugar</th>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Distancia</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Evento 1</td>
+                                <td>Azuay - Ponce Enriuez</td>
+                                <td>12-dic-2020</td>
+                                <td>5K</td>
+                                <td>Registrado</td>
+                                <td>
+                                    <div class="row">
+                                        <div class="container text-center">
+                                            <button type="button" class="btn btn-secondary mr-2">Editar</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>                                                      
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    <div *ngIf="banderaMostrarFormRegistroCategorias" class="container col-12">
+
+        <div class="row m-2">
+            <div class="container text-center border rounded" style="background: rgb(249, 250, 184);">
+                <label class="mt-1"><b>Formulario de creación de categorías</b></label>
+            </div>
+        </div>                
+                
+        <div class="row m-2">
+            <div class="border rounded col-12">
+                <form autocomplete="off" [formGroup]="forma">
+                    <div class="row">                                       
+                        <div class="container col-lg-6 col-md-8 col-sm-12 col-xs-12">                       
+                            <div class="form-group">
+                                <label>Carrera</label>
+                                <select class="custom-select"
+                                    formControlName="carrera">
+                                    <option selected disabled value="">Seleccione</option>
+                                    <option> Carrera 1 </option>
+                                    <option> Carrera 2 </option>
+                                    <option> Carrera 3 </option>                                    
+                                </select>                                                                 
+                            </div>
+            
+                            <div class="form-group">
+                                <label>Nombre</label>
+                                <input 
+                                    class="form-control" 
+                                    type="text"
+                                    formControlName="nombre">                                                                    
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Descripcion</label>
+                                <input 
+                                    class="form-control" 
+                                    type="text"
+                                    formControlName="descripcion">
+                            </div>                          
+                            
+                        </div>
+                        <div class="container col-lg-6 col-md-8 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                                <label>Género</label>
+                                <select class="custom-select"
+                                    formControlName="genero">
+                                    <option selected disabled value="">Seleccione</option>
+                                    <option> Masculino </option>
+                                    <option> Femenino </option>
+                                    <option> Otro </option>                                    
+                                </select>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <label>Edad inicio</label>
+                                    <select class="custom-select"
+                                        formControlName="edadInicio">
+                                        <option selected disabled value="">Seleccione</option>
+                                        <option> 16 </option>
+                                        <option> 17 </option>
+                                        <option> 18 </option>                                    
+                                    </select>
+                                </div>
+                                <div class="form-group col-6">
+                                    <label>Edad fin</label>
+                                    <select class="custom-select"
+                                        formControlName="edadFin">
+                                        <option selected disabled value="">Seleccione</option>
+                                        <option> 16 </option>
+                                        <option> 20 </option>
+                                        <option> 25 </option>                                    
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>                                                                                      
+                    </div>
+                </form>       
+            </div>
+        </div>
+        
+        <div class="row m-2">
+            <div class="container text-center border rounded" style="background: rgb(249, 250, 184);">
+                <button type="button" class="btn btn-danger mt-1 mb-1" (click)="cancelarAgregacionCategorias()"> Cancelar </button>
+                <button type="button" class="btn btn-secondary ml-1" (click)="limpiarFormRegistroCategorias()">  Limpiar  </button>
+                <button type="button" class="btn btn-info ml-1" (click)="agregarCategoriaAlaCarrera()">          Agregar  </button>
+            </div>
+        </div>
+
+    </div>
+
+    <div *ngIf="!banderaMostrarFormRegistroCategorias" class="container col-12">
+        <div class="row m-2">                        
+            <div class="container text-center border rounded" style="background: rgb(216, 214, 214);">
+                <button type="button" class="btn btn-danger    mt-1 mb-1" (click)="cancelarCreacionCategorias()"> Cancelar    </button>
+                <button type="button" class="btn btn-secondary ml-1"      (click)="prevPage()">                    << Atrás     </button>
+                <button type="button" class="btn btn-info      ml-1"      (click)="nextPage()">                    Confirmar </button>
+            </div>
+        </div>
+    </div>
+</div>

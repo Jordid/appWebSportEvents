@@ -1,0 +1,200 @@
+<div class="row">       
+    <div class="container col-lg-4 col-md-8 col-sm-8 col-xs-12 pt-4 pb-2">
+        
+        <div class="card">
+            <h4 class="card-header">Registro de usuario</h4>
+            <div class="card-body">
+                <form autocomplete="off" [formGroup]="forma" (ngSubmit)="registrarUsuario()">
+                    <div class="form-group">
+                        <label>Primer nombre</label>
+                        <input type="text"
+                            formControlName="primerNombre" 
+                            class="form-control"
+                            maxlength="30"
+                            [class.is-invalid]="invalido('primerNombre')"/>
+                                                            
+                            <small *ngIf="incompleto('primerNombre')" class="text-danger">
+                                El campo Primer nombre es requerido
+                            </small>
+
+                            <small *ngIf="!incompleto('primerNombre') && minLength('primerNombre')" class="text-danger">
+                                El campo Primer nombre debe contener al menos 3 letras.
+                            </small>
+
+                            <small *ngIf="!incompleto('primerNombre') && !minLength('primerNombre') && patternSoloLetrasSinTildes('primerNombre')" class="text-danger">
+                                El campo Primer nombre debe contener solo letras, sin tides.
+                            </small>                            
+                    </div>
+
+                    <div class="form-group">
+                        <label>Segundo nombre</label>
+                        <input 
+                            type="text" 
+                            formControlName="segundoNombre" 
+                            class="form-control"maxlength="30"
+                            [class.is-invalid]="segundoNombreNoValido('segundoNombre')"/>
+
+                            <small *ngIf="segundoNombreNoValido('segundoNombre') && minLength('segundoNombre')" class="text-danger">
+                                El campo Segundo nombre debe contener al menos 3 letras.
+                            </small>
+
+                            <small *ngIf="segundoNombreNoValido('segundoNombre') && !minLength('segundoNombre') && patternSoloLetrasSinTildes('segundoNombre')" class="text-danger">
+                                El campo Segundo nombre debe contener solo letras, sin tides.
+                            </small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Primer apellido</label>
+                        <input 
+                            type="text" 
+                            formControlName="primerApellido" 
+                            class="form-control"
+                            maxlength="30"
+                            [class.is-invalid]="invalido('primerApellido')"/>
+                                                            
+                            <small *ngIf="incompleto('primerApellido')" class="text-danger">
+                                El campo Primer apellido es requerido
+                            </small>
+
+                            <small *ngIf="!incompleto('primerApellido') && minLength('primerApellido')" class="text-danger">
+                                El campo Primer apellido debe contener al menos 3 letras.
+                            </small>
+
+                            <small *ngIf="!incompleto('primerApellido') && !minLength('primerApellido') && patternSoloLetrasSinTildes('primerApellido')" class="text-danger">
+                                El campo Primer apellido debe contener solo letras, sin tides.
+                            </small>     
+                    </div>
+
+                    <div class="form-group">
+                        <label>Segundo apellido</label>
+                        <input 
+                            type="text" 
+                            formControlName="segundoApellido" 
+                            class="form-control"
+                            class="form-control"maxlength="30"
+                            [class.is-invalid]="segundoApellidoNoValido('segundoApellido')"/>
+
+                            <small *ngIf="segundoApellidoNoValido('segundoApellido') && minLength('segundoApellido')" class="text-danger">
+                                El campo Segundo apellido debe contener al menos 3 letras.
+                            </small>
+
+                            <small *ngIf="segundoApellidoNoValido('segundoApellido') && !minLength('segundoApellido') && patternSoloLetrasSinTildes('segundoApellido')" class="text-danger">
+                                El campo Segundo apellido debe contener solo letras, sin tides.
+                            </small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Rol</label>
+                        <select 
+                            class="form-control"
+                            formControlName="tipo"
+                            [class.is-invalid]="comboIncompleto('tipo', '0')">
+                            
+                            <option *ngFor="let tipo of tiposUsuario" [value]="tipo.codigo"> {{ tipo.valor }}</option>                            
+                        </select>
+                        
+                        <small *ngIf="comboIncompleto('tipo', '0')" class="text-danger">
+                            El campo Rol es obligatorio.
+                        </small>
+                        
+                    </div>  
+
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="text" 
+                            formControlName="email" 
+                            class="form-control"
+                            [class.is-invalid]="incompleto('email') || emailNoValido"/>
+                                                            
+                            <small *ngIf="incompleto('email')" class="text-danger">
+                                El campo Email es obligatorio.
+                            </small>
+                            <small *ngIf="!incompleto('email') && emailNoValido" class="text-danger">
+                                El campo Email no es válido.
+                            </small> 
+
+                    </div>
+
+                    <div class="form-group">
+                        <label>Contraseña</label>
+                        <div class="input-group">                                               
+                            <input 
+                                [type]="tipoDeInputPassword ? 'text' : 'password'"
+                                formControlName="password" 
+                                class="form-control"
+                                maxlength="15"
+                                [class.is-invalid]="invalido('password')"/>
+                            
+                            <div class="input-group-append">
+                                <span class="input-group-text">
+                                    <i
+                                        class="fa"
+                                        [ngClass]="{
+                                        'fa-eye-slash': !tipoDeInputPassword,
+                                        'fa-eye': tipoDeInputPassword
+                                        }"
+                                        (click)="mostrarOcultarPassword()"
+                                    ></i>
+                                </span>
+                            </div>                            
+                        </div>
+                        
+                        <small *ngIf="incompleto('password')" class="text-danger">
+                            El campo Contraseña es obligatorio.
+                        </small>
+                       
+                        <small *ngIf="!incompleto('password') && minLength('password')" class="text-danger">
+                            El campo Contraseña debe contener al menos 8 caracteres.
+                        </small>
+
+                        <small *ngIf="!incompleto('password') && !minLength('password') && patternSoloNumerosLetrasPunto('password')" class="text-danger">
+                            El campo Contraseña debe contener números y letras. (No caracteres especiales).
+                        </small> 
+                    </div>
+
+                    <div class="form-group">
+                        <label>Repetir contraseña</label>                       
+                        <div class="input-group">
+                            <input 
+                            [type]="tipoDeInputPassword2 ? 'text' : 'password'"
+                            formControlName="password2"
+                            class="form-control"
+                            maxlength="15"
+                            [class.is-invalid]="passwordAndPassword2NoIguales()"/>
+
+                            <div class="input-group-append">
+                                <span class="input-group-text">
+                                    <i
+                                        class="fa"
+                                        [ngClass]="{
+                                        'fa-eye-slash': !tipoDeInputPassword2,
+                                        'fa-eye': tipoDeInputPassword2
+                                        }"
+                                        (click)="mostrarOcultarPassword2()"
+                                    ></i>
+                                </span>
+                             </div>
+                        </div>
+
+                        <small *ngIf="incompleto('password2')" class="text-danger">
+                            El campo Repetir contraseña es obligatorio.
+                        </small>
+                        
+                        <small *ngIf="!incompleto('password2') && passwordAndPassword2NoIguales()" class="text-danger">
+                            Los campos Contraseña y Repetir contraseña debe ser iguales.
+                        </small>
+                    </div>
+
+                    <div class="form-group">
+                        <button class="btn btn-primary">                            
+                            Guardar
+                        </button>
+                        <a routerLink="../login" class="btn btn-link">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>        
+    </div>    
+</div>
+<br>
+<br>

@@ -1,0 +1,155 @@
+
+
+    <!--<div class="row" 
+        style="
+            background: url('https://source.unsplash.com/twukN12EN7c/1920x1080');
+            height: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;"> -->
+    <div class="row" 
+            style="
+                background: rgb(253, 250, 230);
+                height: 100%;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;"> 
+        <div class="container text-center col-11">
+
+                <div class="row mt-4">
+                    <div class="container text-center">
+                        <label class=""><b>Resultados de carreras</b></label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="container text-center">
+                        <form autocomplete="off" [formGroup]="forma">
+                            <div class="row">
+                                <div class="col-3">                                        
+                                    <div class="form-group">
+                                        <label>Categorías</label>
+                                        <select class="form-control"
+                                            formControlName="categoria"
+                                            (change)="cambiarFiltros()">
+                                            
+                                            <option *ngFor="let categoria of categorias" [value]="categoria.codigo"> {{ categoria.valor }}</option>
+                                                                        
+                                        </select>                                                                 
+                                    </div> 
+                                </div> 
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label>Géneros</label>
+                                        <select class="form-control"
+                                            formControlName="genero"
+                                            (change)="cambiarFiltros()">
+                                            
+                                            <option *ngFor="let genero of generos" [value]="genero.codigo"> {{ genero.valor }}</option>
+                                                                        
+                                        </select>                                                                 
+                                    </div> 
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label>Eventos</label>
+                                        <select class="form-control"
+                                            formControlName="evento"
+                                            (change)="cambiarFiltros()">
+                                            
+                                            <option *ngFor="let evento of eventos" [value]="evento.codigo"> {{ evento.valor }}</option>
+                                                                        
+                                        </select>                                                                 
+                                    </div>                                                        
+                                </div>  
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label>Distancias</label>
+                                        <select class="form-control"
+                                            formControlName="distancia"
+                                            (change)="cambiarFiltros()">
+                                            
+                                            <option *ngFor="let distancia of distancias" [value]="distancia.codigo"> {{ distancia.valor }}</option>
+                                                                        
+                                        </select>                                                                 
+                                    </div>                                                        
+                                </div>                        
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="table-responsive tableFixHead">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Lugar</th>
+                                <th scope="col">Chip</th>
+                                <th scope="col">Dorsal</th>
+                                <th scope="col">Nombre Participante</th>
+                                <th scope="col">Categoría</th>
+                                <th scope="col">Género</th>
+                                <th scope="col">Tiempo Oficial</th>
+                                <th scope="col">Tiempo Chip</th>
+                                <th scope="col">Pace</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Evento</th>
+                                <th scope="col">Distancia</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let participante of listaParticipantes; let i = index">
+                                <th scope="row"> {{ i+1 }} </th>
+                                <td> {{ participante.lugar }} </td>
+                                <td> {{ participante.chip }} </td>                            
+                                <td> {{ participante.dorsal }} </td>
+                                <td> {{ participante.nombreParticipante }} </td>
+                                <td> {{ participante.categoria }} </td>
+                                <td> {{ participante.genero }} </td>
+                                <td> {{ participante.tiempoOficial }} </td>
+                                <td> {{ participante.tiempoChip }} </td>
+                                <td> {{ participante.pace }} </td>
+                                <td> {{ participante.status }} </td>
+                                <td> {{ participante.evento }} </td>
+                                <td> {{ participante.distancia }} </td>
+                                <td style="width: 125px;">
+                                    <button 
+                                        class="btn btn-primary" 
+                                        title="Ver"                                             
+                                        (click)="verResultado(participante)">
+                                        Ver
+                                    </button>                                                                       
+                                </td>
+                            </tr>                        
+                        </tbody>
+                    </table>
+                </div>
+                
+        </div>
+    </div> 
+
+
+<style>
+    .tableFixHead {
+        overflow-y: auto;
+        height: 520px;
+    }
+    .tableFixHead thead th {
+        position: sticky;
+        top: 0;
+    }
+    /* Just common table stuff. Really. */
+    table {
+        /* border-collapse: collapse; */
+        width: 100%;
+    }
+    th,
+    td {
+        padding: 8px 16px;
+    }
+    th {
+        background: #eee;
+    }
+</style>

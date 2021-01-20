@@ -1,0 +1,86 @@
+<h1 mat-dialog-title>Información de la participación</h1>
+<div mat-dialog-content>
+    <div class="border rounded mb-2">
+
+        <div class="row mt-2 text-right">
+        <div class="col-6">
+            <label for=""><b>Evento:</b></label>      
+            </div>
+            <div class="col-6 text-left">
+            <p> {{ data.evento }} </p>
+            </div>
+        </div>
+
+        <div class="row mt-2 text-right">
+        <div class="col-6">
+            <label for=""><b>Nombres:</b></label>      
+            </div>
+            <div class="col-6 text-left">
+            <p> {{ data.nombreParticipante }} </p>
+            </div>
+        </div>
+
+        <div class="row mt-2 text-right">
+        <div class="col-6">
+            <label for=""><b>Categoría:</b></label>      
+            </div>
+            <div class="col-6 text-left">
+            <p> {{ data.categoria }} </p>
+            </div>
+        </div>
+
+        <div class="row mt-2 text-right">
+        <div class="col-6">
+            <label for=""><b>Distancia:</b></label>      
+            </div>
+            <div class="col-6 text-left">
+            <p> {{ data.distancia }} </p>
+            </div>
+        </div>
+
+
+        <div class="row mt-2 text-right">
+        <div class="col-6">
+            <label for=""><b>Fecha:</b></label>      
+            </div>
+            <div class="col-6 text-left">
+            <p> {{ data.fecha }} </p>
+            </div>
+        </div>
+
+        <div class="row mt-2 text-right">
+        <div class="col-6">
+            <label for=""><b>Lugar:</b></label>      
+            </div>
+            <div class="col-6 text-left">
+            <p> {{ data.lugar }} </p>
+            </div>
+        </div>
+
+        <div class="row mt-2 text-right">
+        <div class="col-6">
+            <label for=""><b>Género:</b></label>      
+            </div>
+            <div class="col-6 text-left">
+            <p> {{ data.genero }} </p>
+            </div>
+        </div>
+        
+        <div class="row mt-2 text-right">
+            <div class="col-6">
+                <label for=""><b>Tiempo Oficial:</b></label>      
+            </div>
+            <div class="col-6 text-left">
+                <p> {{ data.tiempoOficial }} </p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<div class="row mt-2">
+    <div class="container text-center">
+        <button class="btn btn-danger" (click)="cerrarModal()">Cerrar</button>
+        <button class="btn btn-secondary ml-2" (click)="descargarCertificado()">Descargar certificado</button>
+    </div>  
+</div>

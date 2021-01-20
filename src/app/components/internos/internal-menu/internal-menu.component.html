@@ -1,0 +1,35 @@
+<div class="container col-12" style="height: 100%">
+    <div class="row" style="height: 100%;">
+        <div class="col-lg-3 col-md-3 col-sm-6" style="background: rgb(216, 214, 214);">
+            <br>
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">                
+                        
+                <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" 
+                    routerLinkActive="active" [routerLink]="['misparticipaciones']" role="tab"
+                    aria-controls="v-pills-profile" aria-selected="false">Mis participaciones</a>
+
+                <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" 
+                    routerLinkActive="active" [routerLink]="['miseventos']" role="tab"
+                    aria-controls="v-pills-profile" aria-selected="false">Mis eventos</a>
+
+                <a class="nav-link" id="v-pills-proximos-eventos-tab" data-toggle="pill" 
+                    routerLinkActive="active" [routerLink]="['proximoseventos']" role="tab"
+                    aria-controls="v-pills-proximos-eventos" aria-selected="true">Próximos eventos</a>
+               
+            </div>
+            <br>
+        </div>
+        <div class="col-lg-9 col-md-9 col-sm-6" style="background: rgb(255, 255, 255);">
+            <br>
+            <div class="tab-content mt-6 mb-6 border rounded" id="v-pills-tabContent">                
+                <router-outlet></router-outlet>                
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>     
+    </div>
+</div>
+
+
